@@ -7,6 +7,7 @@
 -(Extention: Page de résultas)
 
 On utilisera le framework bootstrap: https://getbootstrap.com/
+## Compatibilité Mobile et petit écrans.
 
 ### On implémentera SQL pour:
 -Système de connexion
@@ -16,3 +17,9 @@ On utilisera le framework bootstrap: https://getbootstrap.com/
 -Pouvoir se login et se connecter a une salle (extention: salle privé)
 -Pouvoir voir la question est voir les reponses des autres membres de la salle (style flux de messages)
 -Pouvoir repondre à la question
+
+Contenu:
+-Welcome.html
+-Login.html
+-Room.html
+-Style.css
