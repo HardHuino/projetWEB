@@ -26,6 +26,10 @@ Contenu:
 
 
 ## Detail Welcome.html
+style:
+-arrière plan : couleur crème
+-header : couleur vert 
+
 
 Contenu :
 -Box vide code de salle
