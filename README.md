@@ -23,3 +23,16 @@ Contenu:
 -Login.html
 -Room.html
 -Style.css
+
+
+## Detail Welcome.html
+
+Contenu :
+-Box vide code de salle
+-Menu deroulant si non connecté 
+    -Box vide nom d'invité
+-Bouton accès salle : si non connecté déroule menu deroulant et affiche en rouge nom d'invité
+
+Sur la page d'acceuil, possibilité de rejoindre une salle via code :
+-Si connecté via un compte personnel : connexion directe a la room avec nom du compte
+-Sinon mode invité : demande d'un pseudo temporaire (le temps de la room)
