@@ -1,0 +1,24 @@
+/* Fond de page crème */
+body {
+    background-color: #FFFDD0 !important;
+    height: 100vh;
+}
+
+/* Navbar vert */
+.navbar {
+    background-color: #00C26E !important;
+}
+
+/* Centrer le formulaire */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+/* Style des boutons */
+#login {
+    width: 100%;
+    margin-right: 5vh;
+}
