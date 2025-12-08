@@ -1,22 +1,24 @@
 <?php
 // Récupérer les paramètres GET
 if (isset($_GET["displayName"]) && isset($_GET["roomCode"])) {
-            $displayName = $_GET['displayName'];
-            $roomCode = $_GET['roomCode'];
-        }
-
-// Connexion à la base de données
-$host="localhost";
-$user="root";
-$pass="root";
-$base="WEBgame";
-/* connexion à la BDD */
-$bdd = mysqli_connect($host,$user,$pass,$base);
-if (!$bdd) {
-    die('Echec de connexion au serveur de base de
-    données:'.mysqli_connect_error().' '.mysqli_connect_errno());
+    $displayName = $_GET['displayName'];
+    $roomCode = $_GET['roomCode'];
 }
-echo "connecté à la base de données";
+
+// Configuration de la base de données
+$host = "localhost";
+$user = "root";
+$pass = "root";
+$base = "WEBgame";
+
+// Connexion à la base de données (sans sélectionner de BDD d'abord)
+$bdd = mysqli_connect($host, $user, $pass);
+if (!$bdd) {
+    die('Echec de connexion au serveur de base de données: ' . mysqli_connect_error() . ' ' . mysqli_connect_errno());
+}
+
+echo "Connecté à la base de données<br>";
+
 mysqli_close($bdd);
 ?>
 
@@ -36,8 +38,10 @@ mysqli_close($bdd);
 
             <form class="row g-3 needs-validation" novalidate>
                 <div class="mb-2">
-                    <label for="validationAnswer" class="form-label"><?php echo "test" ?></label>
-                    <input type="text" class="form-control" id="validationAnswer" placeholder="Entrez votre réponse ici" required>
+                    <label for="validationAnswer" class="form-label"><?php echo htmlspecialchars($questionText); ?></label>
+                    <input type="text" class="form-control" id="validationAnswer" name="answerText" placeholder="Entrez votre réponse ici" required>
+                    <input type="hidden" name="questionId" value="<?php echo $questionId; ?>">
+                    <input type="hidden" name="displayName" value="<?php echo htmlspecialchars($displayName); ?>">
                     <div class="invalid-feedback">
                         Donnez une réponse valide
                     </div>

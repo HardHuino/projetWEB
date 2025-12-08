@@ -30,3 +30,15 @@ CREATE TABLE IF NOT EXISTS answers (
     FOREIGN KEY (questionId) REFERENCES questions(id),
     FOREIGN KEY (displayName) REFERENCES players(displayName)
 );
+
+-- Insérer des rooms de test
+INSERT INTO rooms VALUES
+    ("AAA"),
+    ("BBB"),
+    ("CCC");
+
+-- Insérer des questions de test
+INSERT INTO questions (id, questionText) VALUES
+    (1, "As-tu mangé aujourd'hui ?"),
+    (2, "Quel est ton fruit préféré ?"),
+    (3, "Quel est le plus grand océan ?");
