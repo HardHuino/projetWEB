@@ -39,6 +39,6 @@ INSERT INTO rooms VALUES
 
 -- Insérer des questions de test
 INSERT INTO questions (id, questionText) VALUES
-    (1, "As-tu mangé aujourd'hui ?"),
-    (2, "Quel est ton fruit préféré ?"),
-    (3, "Quel est le plus grand océan ?");
+    (1, "As-tu mange aujourd'hui ?"),
+    (2, "Quel est ton fruit prefere ?"),
+    (3, "Quel est le plus grand ocean ?");

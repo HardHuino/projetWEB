@@ -1,9 +1,9 @@
 <?php
 // Récupérer les paramètres GET
 if (isset($_GET["displayName"]) && isset($_GET["roomCode"])) {
-    $displayName = $_GET['displayName'];
-    $roomCode = $_GET['roomCode'];
-}
+            $displayName = $_GET['displayName'];
+            $roomCode = $_GET['roomCode'];
+        }
 
 // Configuration de la base de données
 $host = "localhost";
@@ -12,13 +12,36 @@ $pass = "root";
 $base = "WEBgame";
 
 // Connexion à la base de données (sans sélectionner de BDD d'abord)
-$bdd = mysqli_connect($host, $user, $pass);
+$bdd = mysqli_connect($host,$user,$pass,$base);
 if (!$bdd) {
     die('Echec de connexion au serveur de base de données: ' . mysqli_connect_error() . ' ' . mysqli_connect_errno());
 }
 
+//Verifie si la salle existe
+$query="SELECT questionText FROM questions ORDER BY RAND() LIMIT 1;";
+$roomRows = mysqli_fetch_assoc(mysqli_query($bdd,$query));
+$roomExists = false;
+foreach ($roomRows as $value) {
+    if($value == $roomCode){
+        $roomExists = false;
+        break;
+    }
+}
+if($roomExists==false){
+    die("Echec de connexion au serveur : La salle n'existe pas");
+}
+
 echo "Connecté à la base de données<br>";
 
+//remplir la base de données avec le nom du joueur et choisir une question à afficher 
+$query="INSERT INTO players (displayName,roomCode) VALUES($displayName,$roomCode)";
+
+mysqli_query($bdd,$query); //ATENTION NE VERIFIE PAS SI LE JOUEUR EXISTE DEJA POUR CETTE SALLE
+
+$query="SELECT questionText FROM questions ORDER BY RAND() LIMIT 1;";
+
+$result=mysqli_query($bdd,$query);
+$questionText = mysqli_fetch_assoc($result);
 mysqli_close($bdd);
 ?>
 
@@ -26,7 +49,7 @@ mysqli_close($bdd);
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title><?php echo $roomCode; ?></title>
+        <title>King'O'Quiz</title>
         <link href="Style.css" rel="stylesheet"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     </head>
@@ -38,9 +61,8 @@ mysqli_close($bdd);
 
             <form class="row g-3 needs-validation" novalidate>
                 <div class="mb-2">
-                    <label for="validationAnswer" class="form-label"><?php echo htmlspecialchars($questionText); ?></label>
+                    <label for="validationAnswer" class="form-label"><?php echo($questionText["questionText"]); ?></label>
                     <input type="text" class="form-control" id="validationAnswer" name="answerText" placeholder="Entrez votre réponse ici" required>
-                    <input type="hidden" name="questionId" value="<?php echo $questionId; ?>">
                     <input type="hidden" name="displayName" value="<?php echo htmlspecialchars($displayName); ?>">
                     <div class="invalid-feedback">
                         Donnez une réponse valide
