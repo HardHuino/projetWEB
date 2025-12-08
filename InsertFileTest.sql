@@ -1,9 +1,9 @@
-INSERT INTO rooms VALUES{
+INSERT INTO rooms VALUES(
     "AAA",
     "B",
     "Jhonny's room"
-}
+);
 
-INSERT INTO questions VALUES(id, questionText){
-    (1,"A tu manger aujourd'hui?")
-}
+INSERT INTO questions (id, questionText) VALUES(
+    1,"A tu manger aujourd'hui?"
+);
