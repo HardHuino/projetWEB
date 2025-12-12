@@ -1,7 +1,28 @@
+/* latin-ext */
+@font-face {
+  font-family: 'Luckiest Guy';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/luckiestguy/v25/_gP_1RrxsjcxVyin9l9n_j2hQ952mDo.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Luckiest Guy';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/luckiestguy/v25/_gP_1RrxsjcxVyin9l9n_j2hTd52.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 /* Fond de page crème */
 body {
+    background-image: url("img/bg.png");
     background-color: #FFFDD0 !important;
-    height: 100vh;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 /* Navbar vert */
@@ -11,14 +32,57 @@ body {
 
 /* Centrer le formulaire */
 form {
+    padding: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     height: 100%;
+    min-height: 80vh;
+}
+
+/* Style de la card du formulaire */
+.form-card {
+    background-color: #FFFDD0 !important;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    max-width: 450px;
+    width: 90%;
+    padding: 1rem;
 }
 
 /* Style des boutons */
 #login {
     width: 100%;
     margin-right: 5vh;
+}
+
+h1 {
+    font-family: 'Luckiest Guy';
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    font-family: 'Luckiest Guy', Impact, fantasy;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: white;
+    padding-bottom: 1vh;
+}
+
+/* Position logo and title on one line and size the title */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.navbar-brand img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    margin-left: 1vw;
+}
+.navbar-brand h1 {
+    font-size: 2rem !important;
+    margin-top: 1.5vh;
 }
