@@ -21,15 +21,15 @@ if (!$bdd) {
 $query="SELECT questionText FROM questions ORDER BY RAND() LIMIT 1;";
 $roomRows = mysqli_fetch_assoc(mysqli_query($bdd,$query));
 $roomExists = false;
-foreach ($roomRows as $value) {
+foreach ($roomRows as $value) {     //ATTENTION BUG ICI $value N'EST PAS UN STRING JE PENSE
     if($value == $roomCode){
         $roomExists = false;
         break;
     }
 }
-if($roomExists==false){
+/*if($roomExists==false){
     die("Echec de connexion au serveur : La salle n'existe pas");
-}
+}*/
 
 echo "Connecté à la base de données<br>";
 
