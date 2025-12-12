@@ -56,12 +56,18 @@ while($currentPlayer!=null) {
     $currentPlayer = mysqli_fetch_assoc($playerRows); //Le prochain displayName 
 }
 
+$query = "INSERT INTO `players`(`displayName`, `roomCode`) VALUES ('".$displayName."','".$roomCode."')";
+if(mysqli_query($bdd,$query)){
+    echo("Bienvenu Nouveau Joueur");
+}
+
 //Si c'est un nouveau joueur pour cette salle
 if($playerExists==false){
-    //J'ai l'impression que le INSERT INTO ne marche pas
-    $query="INSERT INTO players (displayName,roomCode) VALUES($displayName,$roomCode)";
-    mysqli_query($bdd,$query);
-    echo("Nouveau Joueur");
+    //L'INSERT INTO ne marchais pas car il faut une sintaxe particulière pour les variables de chaines de caractères
+    $query = "INSERT INTO `players`(`displayName`, `roomCode`) VALUES ('".$displayName."','".$roomCode."')";
+    if(mysqli_query($bdd,$query)){
+        echo("Bienvenu Nouveau Joueur");
+    }
 }
 
 //A rajouter : récupérer les reponses précédents de ce joueur
