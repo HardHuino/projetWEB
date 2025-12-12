@@ -18,25 +18,53 @@ if (!$bdd) {
 }
 
 //Verifie si la salle existe
-$query="SELECT questionText FROM questions ORDER BY RAND() LIMIT 1;";
-$roomRows = mysqli_fetch_assoc(mysqli_query($bdd,$query));
+$query="SELECT roomCode FROM rooms;";
+$roomRows = mysqli_query($bdd,$query); //Tout les roomCodes
+$currentRoom = mysqli_fetch_assoc($roomRows);//Le roomCode de la preière salle que retourne la requête
 $roomExists = false;
-foreach ($roomRows as $value) {     //ATTENTION BUG ICI $value N'EST PAS UN STRING JE PENSE
-    if($value == $roomCode){
-        $roomExists = false;
+//Pour le rapport : J'avais eu un peu de soucis a verifier si la salle existais car je ne savais pas que mysqli_fetch_assoc renvoiyait 
+//que une ligne de la requete et il fallait l'appeler à nouveau pour qu'il prenne la prochaine ligne
+
+while($currentRoom!=null) {     
+    if($currentRoom["roomCode"] == $roomCode){
+        $roomExists = true;
         break;
     }
+    $currentRoom = mysqli_fetch_assoc($roomRows); //Le prochain roomCode 
 }
-/*if($roomExists==false){
+
+if($roomExists==false){
     die("Echec de connexion au serveur : La salle n'existe pas");
-}*/
+}
 
 echo "Connecté à la base de données<br>";
 
-//remplir la base de données avec le nom du joueur et choisir une question à afficher 
-$query="INSERT INTO players (displayName,roomCode) VALUES($displayName,$roomCode)";
+//Rempli la base de données avec le nom du joueur si il n'existe pas deja et choisir une question à afficher 
 
-mysqli_query($bdd,$query); //ATENTION NE VERIFIE PAS SI LE JOUEUR EXISTE DEJA POUR CETTE SALLE
+$query="SELECT displayName FROM players;"; // WHERE roomCode=$roomCode
+$playerRows = mysqli_query($bdd,$query); //Tout les display names de cette salle
+//Le premier displayName des joueurs de cette salle
+$currentPlayer = mysqli_fetch_assoc($playerRows); 
+
+
+$playerExists = false;
+while($currentPlayer!=null) {     
+    if($currentPlayer["displayName"] == $displayName){
+        $playerExists = true;
+        break;
+    }
+    $currentPlayer = mysqli_fetch_assoc($playerRows); //Le prochain displayName 
+}
+
+//Si c'est un nouveau joueur pour cette salle
+if($playerExists==false){
+    //J'ai l'impression que le INSERT INTO ne marche pas
+    $query="INSERT INTO players (displayName,roomCode) VALUES($displayName,$roomCode)";
+    mysqli_query($bdd,$query);
+    echo("Nouveau Joueur");
+}
+
+//A rajouter : récupérer les reponses précédents de ce joueur
 
 $query="SELECT questionText FROM questions ORDER BY RAND() LIMIT 1;";
 
