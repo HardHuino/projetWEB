@@ -1,82 +1,72 @@
 <?php
-// Récupérer les paramètres GET
-if (isset($_GET["displayName"]) && isset($_GET["roomCode"])) {
-            $displayName = $_GET['displayName'];
-            $roomCode = $_GET['roomCode'];
+    // Récupérer les paramètres GET
+    if (isset($_GET["displayName"]) && isset($_GET["roomCode"])) {
+                $displayName = $_GET['displayName'];
+                $roomCode = $_GET['roomCode'];
+            }
+
+    include 'dbconnect.php';
+
+    //Verifie si la salle existe
+    $query="SELECT roomCode FROM rooms;";
+    $roomRows = mysqli_query($bdd,$query); //Tout les roomCodes
+    $currentRoom = mysqli_fetch_assoc($roomRows);//Le roomCode de la preière salle que retourne la requête
+    $roomExists = false;
+    //Pour le rapport : J'avais eu un peu de soucis a verifier si la salle existais car je ne savais pas que mysqli_fetch_assoc renvoiyait 
+    //que une ligne de la requete et il fallait l'appeler à nouveau pour qu'il prenne la prochaine ligne
+
+    while($currentRoom!=null) {     
+        if($currentRoom["roomCode"] == $roomCode){
+            $roomExists = true;
+            break;
         }
-
-// Configuration de la base de données
-$host = "localhost";
-$user = "root";
-$pass = "root";
-$base = "WEBgame";
-
-// Connexion à la base de données (sans sélectionner de BDD d'abord)
-$bdd = mysqli_connect($host,$user,$pass,$base);
-if (!$bdd) {
-    die('Echec de connexion au serveur de base de données: ' . mysqli_connect_error() . ' ' . mysqli_connect_errno());
-}
-
-//Verifie si la salle existe
-$query="SELECT roomCode FROM rooms;";
-$roomRows = mysqli_query($bdd,$query); //Tout les roomCodes
-$currentRoom = mysqli_fetch_assoc($roomRows);//Le roomCode de la preière salle que retourne la requête
-$roomExists = false;
-//Pour le rapport : J'avais eu un peu de soucis a verifier si la salle existais car je ne savais pas que mysqli_fetch_assoc renvoiyait 
-//que une ligne de la requete et il fallait l'appeler à nouveau pour qu'il prenne la prochaine ligne
-
-while($currentRoom!=null) {     
-    if($currentRoom["roomCode"] == $roomCode){
-        $roomExists = true;
-        break;
+        $currentRoom = mysqli_fetch_assoc($roomRows); //Le prochain roomCode 
     }
-    $currentRoom = mysqli_fetch_assoc($roomRows); //Le prochain roomCode 
-}
 
-if($roomExists==false){
-    die("Echec de connexion au serveur : La salle n'existe pas");
-}
-
-echo "Connecté à la base de données<br>";
-
-//Rempli la base de données avec le nom du joueur si il n'existe pas deja et choisir une question à afficher 
-
-$query="SELECT displayName FROM players;"; // WHERE roomCode=$roomCode
-$playerRows = mysqli_query($bdd,$query); //Tout les display names de cette salle
-//Le premier displayName des joueurs de cette salle
-$currentPlayer = mysqli_fetch_assoc($playerRows); 
-
-
-$playerExists = false;
-while($currentPlayer!=null) {     
-    if($currentPlayer["displayName"] == $displayName){
-        $playerExists = true;
-        break;
+    if($roomExists==false){
+        die("Echec de connexion au serveur : La salle n'existe pas");
     }
-    $currentPlayer = mysqli_fetch_assoc($playerRows); //Le prochain displayName 
-}
 
-$query = "INSERT INTO `players`(`displayName`, `roomCode`) VALUES ('".$displayName."','".$roomCode."')";
-if(mysqli_query($bdd,$query)){
-    echo("Bienvenu Nouveau Joueur");
-}
+    echo "Connecté à la base de données<br>";
 
-//Si c'est un nouveau joueur pour cette salle
-if($playerExists==false){
-    //L'INSERT INTO ne marchais pas car il faut une sintaxe particulière pour les variables de chaines de caractères
+    //Rempli la base de données avec le nom du joueur si il n'existe pas deja et choisir une question à afficher 
+
+    $query="SELECT displayName FROM players;"; // WHERE roomCode=$roomCode
+    $playerRows = mysqli_query($bdd,$query); //Tout les display names de cette salle
+    //Le premier displayName des joueurs de cette salle
+    $currentPlayer = mysqli_fetch_assoc($playerRows); 
+
+
+    $playerExists = false;
+    while($currentPlayer!=null) {     
+        if($currentPlayer["displayName"] == $displayName){
+            $playerExists = true;
+            break;
+        }
+        $currentPlayer = mysqli_fetch_assoc($playerRows); //Le prochain displayName 
+    }
+
     $query = "INSERT INTO `players`(`displayName`, `roomCode`) VALUES ('".$displayName."','".$roomCode."')";
     if(mysqli_query($bdd,$query)){
         echo("Bienvenu Nouveau Joueur");
     }
-}
 
-//A rajouter : récupérer les reponses précédents de ce joueur
+    //Si c'est un nouveau joueur pour cette salle
+    if($playerExists==false){
+        //L'INSERT INTO ne marchais pas car il faut une sintaxe particulière pour les variables de chaines de caractères
+        $query = "INSERT INTO `players`(`displayName`, `roomCode`) VALUES ('".$displayName."','".$roomCode."')";
+        if(mysqli_query($bdd,$query)){
+            echo("Bienvenu Nouveau Joueur");
+        }
+    }
 
-$query="SELECT questionText FROM questions ORDER BY RAND() LIMIT 1;";
+    //A rajouter : récupérer les reponses précédents de ce joueur
 
-$result=mysqli_query($bdd,$query);
-$questionText = mysqli_fetch_assoc($result);
-mysqli_close($bdd);
+    $query="SELECT questionText FROM questions ORDER BY RAND() LIMIT 1;";
+
+    $result=mysqli_query($bdd,$query);
+    $questionText = mysqli_fetch_assoc($result);
+    mysqli_close($bdd);
 ?>
 
 <!DOCTYPE html>

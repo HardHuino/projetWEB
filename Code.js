@@ -1,4 +1,4 @@
-// Example starter JavaScript for disabling form submissions if there are invalid fields
+// Example starter JavaScript for disabling form submissions if there are invalid fields CODE EBOOTSTRAP
 (function () {
     'use strict'
     
@@ -17,4 +17,21 @@
           form.classList.add('was-validated')
         }, false)
       })
-  })()
+  })();
+
+// Toggle between login and register forms
+
+function toggleForms() {
+  var loginPane = document.getElementById('pills-login');
+  var registerPane = document.getElementById('pills-register');
+  console.log("Toggling forms");
+  if (loginPane && registerPane) {
+    if (loginPane.classList.contains('show')) {
+      loginPane.classList.remove('show', 'active');
+      registerPane.classList.add('show', 'active');
+    } else {
+      registerPane.classList.remove('show', 'active');
+      loginPane.classList.add('show', 'active');
+    }
+  }
+}
