@@ -103,7 +103,7 @@ mysqli_close($bdd);
                     </div>
                 </div>
                 <div>
-                    <button class="btn btn-primary" type="submit">Valider</button>
+                    <button class="btn btn-primary" type="submit" methode="GET" action="">Valider</button>
                 </div>
             </form>
         </div>

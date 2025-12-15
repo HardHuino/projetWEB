@@ -27,8 +27,11 @@ CREATE TABLE IF NOT EXISTS answers (
     displayName VARCHAR(50) NOT NULL,
     questionId INT,
     answerText TEXT NOT NULL,
+    roomCode VARCHAR(10) NOT NULL,
+    timeSent TIMESTAMP NOT NULL,
     FOREIGN KEY (questionId) REFERENCES questions(id),
-    FOREIGN KEY (displayName) REFERENCES players(displayName)
+    FOREIGN KEY (displayName) REFERENCES players(displayName),
+    FOREIGN KEY (roomCode) REFERENCES rooms(roomCode)
 );
 
 -- Insérer des rooms de test
