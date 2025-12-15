@@ -4,7 +4,8 @@ USE WEBgame;
 
 -- Table des rooms
 CREATE TABLE IF NOT EXISTS rooms (
-    roomCode VARCHAR(10) PRIMARY KEY
+    roomCode VARCHAR(10) PRIMARY KEY,
+    questionText TEXT NOT NULL
 );
 
 -- Table des joueurs
@@ -25,11 +26,11 @@ CREATE TABLE IF NOT EXISTS questions (
 CREATE TABLE IF NOT EXISTS answers (
     id INT AUTO_INCREMENT PRIMARY KEY,
     displayName VARCHAR(50) NOT NULL,
-    questionId INT,
+    -- questionId INT,
     answerText TEXT NOT NULL,
     roomCode VARCHAR(10) NOT NULL,
     timeSent TIMESTAMP NOT NULL,
-    FOREIGN KEY (questionId) REFERENCES questions(id),
+    -- FOREIGN KEY (questionId) REFERENCES questions(id),
     FOREIGN KEY (displayName) REFERENCES players(displayName),
     FOREIGN KEY (roomCode) REFERENCES rooms(roomCode)
 );
@@ -44,12 +45,6 @@ CREATE TABLE IF NOT EXISTS accounts (
 
 -- Insérer des rooms de test
 INSERT INTO rooms VALUES
-    ("AAA"),
-    ("BBB"),
-    ("CCC");
-
--- Insérer des questions de test
-INSERT INTO questions (id, questionText) VALUES
-    (1, "As-tu mange aujourd'hui ?"),
-    (2, "Quel est ton fruit prefere ?"),
-    (3, "Quel est le plus grand ocean ?");
+    ("AAA", "As-tu mange aujourd'hui ?"),
+    ("BBB", "Quel est ton fruit prefere ?"),
+    ("CCC", "Quel est le plus grand ocean ?");

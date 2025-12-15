@@ -83,7 +83,7 @@
             <p>Joueur: <strong><?php echo $displayName; ?></strong></p>
             <p>Code de room: <code><?php echo $roomCode; ?></code></p>
 
-            <form class="row g-3 needs-validation" novalidate>
+            <form class="row g-3 needs-validation join-form" novalidate>
                 <div class="mb-2">
                     <label for="validationAnswer" class="form-label"><?php echo($questionText["questionText"]); ?></label>
                     <input type="text" class="form-control" id="validationAnswer" name="answerText" placeholder="Entrez votre réponse ici" required>
