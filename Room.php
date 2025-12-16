@@ -1,8 +1,8 @@
 <?php
     // Récupérer les paramètres GET
-    if (isset($_GET["displayName"]) && isset($_GET["roomCode"])) {
-                $displayName = $_GET['displayName'];
-                $roomCode = $_GET['roomCode'];
+    if (isset($_COOKIE["displayName"]) && isset($_COOKIE["roomCode"])) {
+                $displayName = $_COOKIE['displayName'];
+                $roomCode = $_COOKIE['roomCode'];
             }
 
     include 'dbconnect.php';
@@ -62,10 +62,13 @@
 
     //A rajouter : récupérer les reponses précédents de ce joueur
 
-    $query="SELECT questionText FROM questions ORDER BY RAND() LIMIT 1;";
+    //A REVOIR pour quand est-ce qu'une question change
+    $query="SELECT questionText FROM rooms WHERE roomCode='".$roomCode."';";
 
     $result=mysqli_query($bdd,$query);
-    $questionText = mysqli_fetch_assoc($result);
+    $result=mysqli_fetch_assoc($result);
+    $questionText = $result["questionText"];
+
     mysqli_close($bdd);
 ?>
 
@@ -83,9 +86,23 @@
             <p>Joueur: <strong><?php echo $displayName; ?></strong></p>
             <p>Code de room: <code><?php echo $roomCode; ?></code></p>
 
-            <form class="row g-3 needs-validation" novalidate>
+
+            <form id="submitForm" class="row g-3 needs-validation" method="POST" action="
+                <?php
+                    
+                    include 'dbconnect.php';
+                    if (isset($_COOKIE["displayName"]) && isset($_COOKIE["roomCode"]) && isset($_POST["answerText"])) {
+                        $displayName = $_COOKIE['displayName'];
+                        $roomCode = $_COOKIE['roomCode'];
+                        $answerText = $_POST['answerText'];
+                        $query = "INSERT INTO `answers`(`displayName`,`answerText`,`roomCode`,`timeSent`) VALUES ('".$displayName."','".$answerText."','".$roomCode."',CURRENT_TIMESTAMP)";
+                        mysqli_query($bdd,$query);
+                    }
+                ?>
+            " novalidate>
+
                 <div class="mb-2">
-                    <label for="validationAnswer" class="form-label"><?php echo($questionText["questionText"]); ?></label>
+                    <label for="validationAnswer" class="form-label"><?php echo($questionText); ?></label>
                     <input type="text" class="form-control" id="validationAnswer" name="answerText" placeholder="Entrez votre réponse ici" required>
                     <input type="hidden" name="displayName" value="<?php echo htmlspecialchars($displayName); ?>">
                     <div class="invalid-feedback">
@@ -93,10 +110,14 @@
                     </div>
                 </div>
                 <div>
-                    <button class="btn btn-primary" type="submit" methode="GET" action="">Valider</button>
+                    <button class="btn btn-primary" type="submit" name="submitA" onclick="SubmitFormData();">Valider</button>
                 </div>
             </form>
         </div>
+
+        <?php 
+        
+        ?> 
 
         <script src="Code.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>

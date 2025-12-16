@@ -35,3 +35,16 @@ function toggleForms() {
     }
   }
 }
+
+// Submit answers to questions
+
+function SubmitFormData(displayName, roomCode) {
+    var displayName = displayName;
+    var answerText = $("#answerText").val();
+    var roomCode = roomCode;
+    $.post("submitAnswer.php", { displayName : displayName, answerText : answerText, roomCode: roomCode });
+  //   function(data) {
+	//  $('#submitForm')[0].reset();
+  //   });
+}
+

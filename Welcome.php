@@ -41,7 +41,7 @@
             </div>
         </nav>
 
-        <form class="needs-validation" METHOD="GET" action="Room.php" novalidate>
+        <form class="needs-validation" METHOD="GET" action="W-R.php" novalidate>
             <div class="card form-card">
                 <div class="card-header">
                     <h2 class="text-center">Rejoindre une salle</h2>
