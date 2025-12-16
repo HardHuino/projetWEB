@@ -87,7 +87,7 @@
             <p>Code de room: <code><?php echo $roomCode; ?></code></p>
 
 
-            <form id="submitForm" class="row g-3 needs-validation" method="POST" action="
+            <form id="submitForm" class="row g-3 needs-validation join-form" method="POST" action="
                 <?php
                     
                     include 'dbconnect.php';
