@@ -83,8 +83,7 @@
                     <h2 class="text-center">Rejoindre une salle</h2>
                 </div>
                 <div class="card-body">
-                    <div class="mb-3">
-                        <form class="needs-validation" METHOD="GET" action="Room.php" novalidate>
+                    <form class="needs-validation" METHOD="GET" action="Room.php" novalidate>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="roomCode" name="roomCode" placeholder="Code de la salle" required>
                             <label for="roomCode" class="form-label">Code de la salle</label>
@@ -93,15 +92,16 @@
                             </div>
                         </div>
                         <?php if (!(isset($_SESSION['username']))): ?>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="displayName" name="displayName" placeholder="Entrer un nom" required>
-                            <label for="roomCode" class="form-label">Entrer un nom</label>
-                        </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="displayName" name="displayName" placeholder="Entrer un nom" required>
+                                <label for="displayName" class="form-label">Entrer un nom</label>
+                            </div>
+                        <?php else: ?>
+                            <input type="hidden" name="displayName" value="<?php echo htmlspecialchars($_SESSION['username']); ?>">
                         <?php endif; ?>
-                        </form>
-                    </div>
-                    <br>
-                    <input type="submit" value="Rejoindre une salle" class="btn btn-success w-100" id="joinRoom">
+                        <br>
+                        <input type="submit" value="Rejoindre une salle" class="btn btn-success w-100" id="joinRoom">
+                    </form>
                 </div>
             </div>
         </div>
