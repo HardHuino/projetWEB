@@ -6,8 +6,8 @@ $user = "root";
 $pass = "root";
 $base = "WEBgame";
 
-// Connexion à la base de données (sans sélectionner de BDD d'abord)
-$bdd = mysqli_connect($host,$user,$pass,$base);
+// Connexion à la base de données (et création si elle n'existe pas)
+$bdd = @mysqli_connect($host,$user,$pass,$base);
 if (!$bdd) {
     $sqlFile = 'setup.sql';
     $conn = @mysqli_connect($host, $user, $pass);

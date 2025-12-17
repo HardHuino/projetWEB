@@ -1,4 +1,6 @@
 <?php
+    date_default_timezone_set('Europe/Paris');
+
     if (isset($_COOKIE["roomCode"])) {
         $roomCode = $_COOKIE['roomCode'];
     } else {
@@ -52,58 +54,41 @@
                 </div>
             </div>
         </nav>
-
-
         
-        <?php foreach ($answers as $answer): ?>
-        <div class="card text-center m-3 w-25 mx-auto">
-            <div class="card-header">
-                <h2><?php echo htmlspecialchars($answer['displayName']); ?></h2>
-            </div>
-            <div class="card-body">
-                <p><?php echo htmlspecialchars($answer['answerText']); ?></p>
-            </div>
-            <div class="card-footer text-muted">
-                Répondu à : <?php echo htmlspecialchars($answer['timeSent']); ?>
-            </div>
-        </div>
-        <?php endforeach; ?>
+        <br><br><br><br>
 
-
-
-        <div class="container d-flex justify-content-center align-items-center min-vh-100">
-            <div class="card form-card center w-75">
-                <div class="card-header text-center">
-                    <h2><?php echo htmlspecialchars($question); ?></h2>
-                </div>
-                <div class="card-body">
-                    <h3>Réponses des joueurs :</h3>
-                    <?php if (count($answers) > 0): ?>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Joueur</th>
-                                    <th>Réponse</th>
-                                    <th>Heure</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($answers as $answer): ?>
-                                    <tr>
-                                        <td><?php echo htmlspecialchars($answer['displayName']); ?></td>
-                                        <td><?php echo htmlspecialchars($answer['answerText']); ?></td>
-                                        <td><?php echo htmlspecialchars($answer['timeSent']); ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    <?php else: ?>
-                        <p>Aucune réponse pour le moment.</p>
-                    <?php endif; ?>
-                </div>
-            </div>
+        <div class="card bg-success m-auto">
+            <h2 class="text-center fs-1 text-white">Question : <?php echo htmlspecialchars($question); ?></h2>
         </div>
 
+        <div class="container-fluid  py-4">
+            <?php if (count($answers) > 0): ?>
+                <div class="row row-cols-md-4 g-4">
+                    <?php foreach ($answers as $answer): ?>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2 class="fs-4"><?php echo htmlspecialchars($answer['displayName']); ?></h2>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text "><?php echo htmlspecialchars($answer['answerText']); ?></p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted"><?php echo date('d/m/Y H:i', strtotime($answer['timeSent'])); ?></small>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php else: ?>
+                <p class="text-center">Aucune réponse pour le moment.</p>
+            <?php endif; ?>
+        </div>
+
+        <footer class="text-center py-4 fixed-bottom">
+            <p>© 2025 King'O'Quiz. Tous droits réservés.</p>
+            <a href="https://www.vecteezy.com/vector-art/7384712-medieval-landscape-background">Medieval Vectors by Vecteezy</a>
+        </footer>
         <script src="Code.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     </body>
