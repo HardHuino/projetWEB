@@ -45,42 +45,42 @@
         <div class="modal fade" id="roomCreation" tabindex="-1" aria-labelledby="roomCreationLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <form class="needs-validation" METHOD="GET" action="roomCreation.php" novalidate>
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 class="modal-title fs-5" id="roomCreationLabel">Creation de salle</h2>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="roomCode" name="roomCode" placeholder="Code de la salle" required>
-                                <label for="roomCode" class="form-label">Code de la salle</label>
-                                <div class="invalid-feedback">
-                                    Donnez un code de salle valide
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title" id="roomCreationLabel">Creation de salle</h2>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="roomCode" name="roomCode" placeholder="Code de la salle" required>
+                                    <label for="roomCode" class="form-label">Code de la salle</label>
+                                    <div class="invalid-feedback">
+                                        Donnez un code de salle valide
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="question" name="question" placeholder="Question" required>
-                                <label for="question" class="form-label">Question</label>
-                                <div class="invalid-feedback">
-                                    Donnez une question valide
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="question" name="question" placeholder="Question" required>
+                                    <label for="question" class="form-label">Question</label>
+                                    <div class="invalid-feedback">
+                                        Donnez une question valide
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                        <input type="hidden" name="displayName" value="<?php echo htmlspecialchars($_SESSION['username']); ?>">
+                            </form>
+                            <input type="hidden" name="displayName" value="<?php echo htmlspecialchars($_SESSION['username']); ?>">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                            <button type="submit" class="btn btn-success" id="createRoom">Créer la salle</button>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                        <button type="submit" class="btn btn-success" id="createRoom">Créer la salle</button>
-                    </div>
-                </div>
                 </form>
             </div>
         </div>
 
         <div class="container d-flex justify-content-center align-items-center min-vh-100">
-            <div class="card form-card center join-card">
-                <div class="card-header">
-                    <h2 class="text-center">Rejoindre une salle</h2>
+            <div class="card form-card center w-50">
+                <div class="card-header text-center">
+                    <h2>Rejoindre une salle</h2>
                 </div>
                 <div class="card-body">
                     <form class="needs-validation" METHOD="GET" action="W-R.php" novalidate>

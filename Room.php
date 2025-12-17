@@ -27,7 +27,7 @@
         die("Echec de connexion au serveur : La salle n'existe pas");
     }
 
-    echo "Connecté à la base de données<br>";
+    // echo "Connecté à la base de données<br>";
 
     //Rempli la base de données avec le nom du joueur si il n'existe pas deja et choisir une question à afficher 
 
@@ -48,7 +48,7 @@
 
     $query = "INSERT INTO `players`(`displayName`, `roomCode`) VALUES ('".$displayName."','".$roomCode."')";
     if(mysqli_query($bdd,$query)){
-        echo("Bienvenu Nouveau Joueur");
+        // echo("Bienvenu Nouveau Joueur");
     }
 
     //Si c'est un nouveau joueur pour cette salle
@@ -56,7 +56,7 @@
         //L'INSERT INTO ne marchais pas car il faut une sintaxe particulière pour les variables de chaines de caractères
         $query = "INSERT INTO `players`(`displayName`, `roomCode`) VALUES ('".$displayName."','".$roomCode."')";
         if(mysqli_query($bdd,$query)){
-            echo("Bienvenu Nouveau Joueur");
+            // echo("Bienvenu Nouveau Joueur");
         }
     }
 
@@ -77,44 +77,76 @@
     <head>
         <meta charset="utf-8">
         <title>King'O'Quiz</title>
-        <link href="Style.css" rel="stylesheet"/>
+        <link rel="icon" type="image/png" href="img/logo.png"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <link href="Style.css" rel="stylesheet"/>
     </head>
     <body>
-        <div class="container mt-5">
-            <h1>Room: <?php echo $roomCode; ?></h1>
-            <p>Joueur: <strong><?php echo $displayName; ?></strong></p>
-            <p>Code de room: <code><?php echo $roomCode; ?></code></p>
 
-
-            <form id="submitForm" class="row g-3 needs-validation join-form" method="POST" action="
-                <?php
-                    
-                    include 'dbconnect.php';
-                    if (isset($_COOKIE["displayName"]) && isset($_COOKIE["roomCode"]) && isset($_POST["answerText"])) {
-                        $displayName = $_COOKIE['displayName'];
-                        $roomCode = $_COOKIE['roomCode'];
-                        $answerText = $_POST['answerText'];
-                        $query = "INSERT INTO `answers`(`displayName`,`answerText`,`roomCode`,`timeSent`) VALUES ('".$displayName."','".$answerText."','".$roomCode."',CURRENT_TIMESTAMP)";
-                        mysqli_query($bdd,$query);
-                    }
-                ?>
-            " novalidate>
-
-                <div class="mb-2">
-                    <label for="validationAnswer" class="form-label"><?php echo($questionText); ?></label>
-                    <input type="text" class="form-control" id="validationAnswer" name="answerText" placeholder="Entrez votre réponse ici" required>
-                    <input type="hidden" name="displayName" value="<?php echo htmlspecialchars($displayName); ?>">
-                    <div class="invalid-feedback">
-                        Donnez une réponse valide
-                    </div>
+        <nav class="navbar navbar-expand-lg py-2 fixed-top" data-bs-theme="dark">
+            <div class="container-fluid">
+                <a class="navbar-brand fs-2" href="Welcome.php">
+                    <img src="img/logo.png" alt="Logo" width="10%" height="10%" class="d-inline-block align-text-top me-2">
+                    <h1>King'O'Quiz</h1>
+                </a>
+                <h1 class="position-absolute start-50 translate-middle-x">Room: <?php echo $roomCode; ?></h1>
+                <div class="d-flex gap-1">
+                    <?php if (isset($_SESSION['username'])) : ?>
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#roomCreation">Créer une salle</button>
+                        <div class="btn-group">
+                            <button id="username" type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                <?php echo htmlspecialchars($_SESSION['username']); ?>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-lg-end">
+                                <li><a class="dropdown-item" href="#">Statistiques</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a href="logout.php" class="dropdown-item" href="#">Déconnexion</a></li>
+                            </ul>
+                        </div>
+                    <?php else: ?>
+                        <p>Nom d'invité: <strong><?php echo $displayName; ?></strong></p>
+                    <?php endif; ?>
                 </div>
-                <div>
-                    <button class="btn btn-primary" type="submit" name="submitA" onclick="SubmitFormData();">Valider</button>
+            </div>
+        </nav>
+    
+
+        <div class="container d-flex justify-content-center align-items-center min-vh-100">
+            <div class="card form-card center w-75">
+                <div class="card-header text-center">
+                    <h2><?php echo($questionText); ?></h2>
                 </div>
-            </form>
+                <div class="card-body">
+                    <form id="submitForm" class="needs-validation" method="POST" action="
+                        <?php
+                            
+                            include 'dbconnect.php';
+                            if (isset($_COOKIE["displayName"]) && isset($_COOKIE["roomCode"]) && isset($_POST["answerText"])) {
+                                $displayName = $_COOKIE['displayName'];
+                                $roomCode = $_COOKIE['roomCode'];
+                                $answerText = $_POST['answerText'];
+                                $query = "INSERT INTO `answers`(`displayName`,`answerText`,`roomCode`,`timeSent`) VALUES ('".$displayName."','".$answerText."','".$roomCode."',CURRENT_TIMESTAMP)";
+                                mysqli_query($bdd,$query);
+                                header('Location: /projetWEB/Results.php');
+                            }
+                        ?> 
+                        " novalidate>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="validationAnswer" name="answerText" placeholder="Votre réponse ici" required>
+                            <label for="validationAnswer" class="form-label">Votre réponse ici</label>
+                            <div class="invalid-feedback">
+                                Donnez une réponse valide
+                            </div>
+                        </div>
+                        <br>
+                        <input type="hidden" name="displayName" value="<?php echo htmlspecialchars($displayName); ?>">
+                        <button class="btn btn-success w-100" type="submit" name="submitA" onclick="SubmitFormData();">Valider</button>
+                    </form>
+                </div>
+            </div>
         </div>
-
         <?php 
         
         ?> 
