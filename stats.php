@@ -29,7 +29,7 @@
                                 <?php echo htmlspecialchars($_SESSION['username']); ?>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-lg-end">
-                                <li><a class="dropdown-item" href="stats.php">Statistiques</a></li>
+                                <li><a class="dropdown-item" href="Stats.php">Statistiques</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a href="logout.php" class="dropdown-item">Déconnexion</a></li>
                             </ul>
@@ -74,6 +74,18 @@
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+
+        <div class="container d-flex justify-content-center align-items-center min-vh-100">
+            <div class="card form-card center w-75">
+                <div class="card-header text-center">
+                    <h2>Statistiques</h2>
+                </div>
+                <div class="card-body text-center">
+                    <p>Cette fonctionnalité n'est pas encore disponible.</p>
+                    <p>Revenez plus tard !</p>
+                </div>
             </div>
         </div>
         
