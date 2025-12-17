@@ -1,10 +1,5 @@
 <?php
     session_start();
-    $error = false;
-    if (isset($_COOKIE['error'])) {
-        $error = $_COOKIE['error'];
-        setcookie('error', '', time() - 3600, "/"); // Supprimer le cookie
-    }
     include 'dbconnect.php';
 ?>
 <!DOCTYPE html>
@@ -18,6 +13,8 @@
         <link href="Style.css" rel="stylesheet"/>
     </head>
     <body>
+        
+
         <nav class="navbar navbar-expand-lg py-2 fixed-top" data-bs-theme="dark">
             <div class="container-fluid">
                 <a class="navbar-brand fs-2" href="Welcome.php">
@@ -79,43 +76,7 @@
                 </form>
             </div>
         </div>
-
-        <div class="container d-flex justify-content-center align-items-center min-vh-100">
-            <div class="card form-card center w-50">
-                <div class="card-header text-center">
-                    <h2>Rejoindre une salle</h2>
-                </div>
-                <div class="card-body">
-                    <form class="needs-validation" METHOD="GET" action="W-R.php" novalidate>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="roomCode" name="roomCode" placeholder="Code de la salle" required>
-                            <label for="roomCode" class="form-label">Code de la salle</label>
-                            <div class="invalid-feedback">
-                                Donnez un code de salle valide
-                            </div>
-                        </div>
-                        <?php if ($error): ?>
-                            <div class="alert alert-danger text-center mt-2">La salle n'existe pas.</div>
-                        <?php endif; ?>
-                        <?php if (!(isset($_SESSION['username']))): ?>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="displayName" name="displayName" placeholder="Entrer un nom" required>
-                                <label for="displayName" class="form-label">Entrer un nom</label>
-                            </div>
-                        <?php else: ?>
-                            <input type="hidden" name="displayName" value="<?php echo htmlspecialchars($_SESSION['username']); ?>">
-                        <?php endif; ?>
-                        <br>
-                        <input type="submit" value="Rejoindre une salle" class="btn btn-success w-100" id="joinRoom">
-                    </form>
-                </div>
-            </div>
-            
-        </div>
-        <footer class="text-center py-4 fixed-bottom">
-            <p>© 2025 King'O'Quiz. Tous droits réservés.</p>
-            <a href="https://www.vecteezy.com/vector-art/7384712-medieval-landscape-background">Medieval Vectors by Vecteezy</a>
-        </footer>
+        
         <script src="Code.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     </body>

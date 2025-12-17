@@ -53,6 +53,24 @@
             </div>
         </nav>
 
+
+        
+        <?php foreach ($answers as $answer): ?>
+        <div class="card text-center m-3 w-25 mx-auto">
+            <div class="card-header">
+                <h2><?php echo htmlspecialchars($answer['displayName']); ?></h2>
+            </div>
+            <div class="card-body">
+                <p><?php echo htmlspecialchars($answer['answerText']); ?></p>
+            </div>
+            <div class="card-footer text-muted">
+                Répondu à : <?php echo htmlspecialchars($answer['timeSent']); ?>
+            </div>
+        </div>
+        <?php endforeach; ?>
+
+
+
         <div class="container d-flex justify-content-center align-items-center min-vh-100">
             <div class="card form-card center w-75">
                 <div class="card-header text-center">

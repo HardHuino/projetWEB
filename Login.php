@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <link href="Style.css" rel="stylesheet"/>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg py-2" data-bs-theme="dark">
+        <nav class="navbar navbar-expand-lg py-2 fixed-top" data-bs-theme="dark">
             <div class="container-fluid">
                 <a class="navbar-brand fs-2" href="Welcome.php">
                     <img src="img/logo.png" alt="Logo" width="10%" height="10%" class="d-inline-block align-text-top me-2">
@@ -61,18 +61,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </nav>
         
-        <?php if ($error): ?>
-        <div class="alert alert-danger text-center"><?php echo $error; ?></div>
-        <?php endif; ?>
-        <?php if ($success): ?>
-        <div class="alert alert-success text-center"><?php echo $success; ?></div>
-        <?php endif; ?>
-        
-        <!-- LOGIN -->
         <div class="tab-content">
+
+
+            <!-- LOGIN -->
+
             <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
                 <div class="container d-flex justify-content-center align-items-center min-vh-100">
-                    <div class="card form-card">
+                    <div class="card form-card w-25">
                         <div class="card-header">
                             <h2 class="text-center">Connexion</h2>
                         </div>
@@ -95,6 +91,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     </div>
                                 </div>
                                 <input type="submit" value="Se connecter" class="btn btn-success w-100" id="loginButton">
+
+                                <?php if ($error): ?>
+                                <div class="alert alert-danger alert-dismissible mt-2"><?php echo $error; ?><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
+                                <?php endif; ?>
+                                <?php if ($success): ?>
+                                <div class="alert alert-success text-center mt-2"><?php echo $success; ?></div>
+                                <?php endif; ?>
+
                                 <p class="text-center mt-2">Tu n'as pas de compte ? <a href="#" id="showRegister" onclick="toggleForms()">Inscris-toi</a></p>
                             </form>
                         </div>
@@ -105,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <!-- REGISTER -->
             <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
                 <div class="container d-flex justify-content-center align-items-center min-vh-100">
-                    <div class="card form-card">
+                    <div class="card form-card w-25">
                         <div class="card-header">
                             <h2 class="text-center">Inscription</h2>
                         </div>
@@ -135,6 +139,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     </div>
                                 </div>
                                 <input type="submit" value="S'inscrire" class="btn btn-success w-100" id="registerButton">
+
+                                <?php if ($error): ?>
+                                <br>
+                                <div class="alert alert-danger text-center h-25"><?php echo $error; ?></div>
+                                <?php endif; ?>
+                                <?php if ($success): ?>
+                                <div class="alert alert-success text-center"><?php echo $success; ?></div>
+                                <?php endif; ?>
+
                                 <p class="text-center mt-2">Tu as déjà un compte ? <a href="#" id="showLogin" onclick="toggleForms()">Connecte-toi</a></p>
                             </form>
                         </div>

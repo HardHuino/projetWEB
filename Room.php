@@ -7,26 +7,6 @@
 
     include 'dbconnect.php';
 
-    //Verifie si la salle existe
-    $query="SELECT roomCode FROM rooms;";
-    $roomRows = mysqli_query($bdd,$query); //Tout les roomCodes
-    $currentRoom = mysqli_fetch_assoc($roomRows);//Le roomCode de la preière salle que retourne la requête
-    $roomExists = false;
-    //Pour le rapport : J'avais eu un peu de soucis a verifier si la salle existais car je ne savais pas que mysqli_fetch_assoc renvoiyait 
-    //que une ligne de la requete et il fallait l'appeler à nouveau pour qu'il prenne la prochaine ligne
-
-    while($currentRoom!=null) {     
-        if($currentRoom["roomCode"] == $roomCode){
-            $roomExists = true;
-            break;
-        }
-        $currentRoom = mysqli_fetch_assoc($roomRows); //Le prochain roomCode 
-    }
-
-    if($roomExists==false){
-        die("Echec de connexion au serveur : La salle n'existe pas");
-    }
-
     // echo "Connecté à la base de données<br>";
 
     //Rempli la base de données avec le nom du joueur si il n'existe pas deja et choisir une question à afficher 
@@ -105,7 +85,7 @@
                             </ul>
                         </div>
                     <?php else: ?>
-                        <p>Nom d'invité: <strong><?php echo $displayName; ?></strong></p>
+                        <p>Nom : <strong><?php echo $displayName; ?></strong></p>
                     <?php endif; ?>
                 </div>
             </div>
@@ -142,7 +122,7 @@
                         </div>
                         <br>
                         <input type="hidden" name="displayName" value="<?php echo htmlspecialchars($displayName); ?>">
-                        <button class="btn btn-success w-100" type="submit" name="submitA" onclick="SubmitFormData();">Valider</button>
+                        <button class="btn btn-success w-100" type="submit" name="submitA">Valider</button>
                     </form>
                 </div>
             </div>

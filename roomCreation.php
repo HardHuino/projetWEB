@@ -17,12 +17,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $query = "INSERT INTO players (displayName, roomCode) VALUES ('$displayName', '$roomCode')";
     if (mysqli_query($bdd, $query)) {
         echo "Joueur ajouté avec succès.<br>";
-        header("Location: Room.php?displayName=" . urlencode($displayName) . "&roomCode=" . urlencode($roomCode));
+        include('W-R.php');
         exit();
     } else {
         die("Erreur lors de l'ajout du joueur : " . mysqli_error($bdd));
     }
-    header("Location: Room.php?displayName=" . urlencode($displayName) . "&roomCode=" . urlencode($roomCode));
+    include('W-R.php');
     exit();
     mysqli_close($bdd);
 }

@@ -37,6 +37,26 @@ body {
 /* Navbar */
 .navbar {
     background-color: var(--primary);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+}
+.navbar-brand img {
+    width: 64px;
+    height: 64px;
+    margin-left: 1vw;
+    margin-top: -1vh;
+    transition: transform 0.3s ease;
+}
+.navbar-brand img:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+.navbar-brand h1 {
+    font-size: 2.5rem;
 }
 
 .dropdown-item:active {
@@ -61,7 +81,7 @@ body {
     background-color: var(--secondary);
     padding-top: 2vh;
     border-radius: 12px 12px 0 0 !important;
-}
+}   
 
 .modal-content {
     background-color: var(--secondary);
@@ -83,26 +103,6 @@ h2 {
     font-family: 'Luckiest Guy';
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     color: var(--bs-success);
-}
-
-/* Position logo and title on one line and size the title */
-.navbar-brand {
-    display: flex;
-    align-items: center;
-    gap: 0.5vw;
-}
-.navbar-brand img {
-    width: 64px;
-    height: 64px;
-    margin-left: 1vw;
-    margin-top: -1vh;
-    transition: transform 0.3s ease;
-}
-.navbar-brand img:hover {
-    transform: scale(1.1) rotate(5deg);
-}
-.navbar-brand h1 {
-    font-size: 2.5rem;
 }
 
 /* Style de l'accordéon */
