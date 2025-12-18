@@ -63,7 +63,7 @@ body {
     background-color:var(--bs-success);
 }
 
-/* Style des formulaires/card (scopé au formulaire de rejoindre via la classe `join-form`) */
+/* Style des formulaires/card/modal (scopé au formulaire de rejoindre via la classe `join-form`) */
 
 .form-control:focus {
   border-color: var(--bs-success-border-subtle);
@@ -87,7 +87,7 @@ body {
     background-color: var(--secondary);
 }
 
-/* Style des boutons */
+/* Style bouton login */
 #login {
     width: 100%;
     margin-right: 5vh;
@@ -105,7 +105,7 @@ h2 {
     color: var(--bs-success);
 }
 
-/* Style de l'accordéon */
+/* Style de l'accordéon (inutile actuellement car on a supprimmé l'accordéon mais pourrait être utile pour le futur)*/
 .accordion-button:not(.collapsed) {
     background-color: var(--bs-success-bg-subtle);
 }

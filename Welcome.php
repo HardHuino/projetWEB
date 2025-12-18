@@ -101,6 +101,9 @@
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" id="displayName" name="displayName" placeholder="Entrer un nom" required>
                                 <label for="displayName" class="form-label">Entrer un nom</label>
+                                <div class="invalid-feedback">
+                                    Donnez un nom valide
+                                </div>
                             </div>
                         <?php else: ?>
                             <input type="hidden" name="displayName" value="<?php echo htmlspecialchars($_SESSION['username']); ?>">

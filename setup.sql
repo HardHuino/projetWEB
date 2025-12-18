@@ -13,7 +13,6 @@ CREATE TABLE IF NOT EXISTS players (
     displayName VARCHAR(50) NOT NULL,
     roomCode VARCHAR(10) NOT NULL,
     FOREIGN KEY (roomCode) REFERENCES rooms(roomCode),
-    FOREIGN KEY (displayName) REFERENCES answers(displayName),
     PRIMARY KEY (displayName, roomCode)
 );
 

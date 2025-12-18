@@ -13,9 +13,9 @@
     $roomRows = mysqli_query($bdd,$query); //Tout les roomCodes
     $currentRoom = mysqli_fetch_assoc($roomRows);//Le roomCode de la preière salle que retourne la requête
     $roomExists = false;
-    //Pour le rapport : J'avais eu un peu de soucis a verifier si la salle existais car je ne savais pas que mysqli_fetch_assoc renvoiyait 
-    //que une ligne de la requete et il fallait l'appeler à nouveau pour qu'il prenne la prochaine ligne
+    //mysqli_fetch_assoc renvoiyait qu'une ligne de la requete et il fallait l'appeler à nouveau pour qu'il prenne la prochaine ligne
 
+     //Verifie si la salle existe
     while($currentRoom!=null) {     
         if($currentRoom["roomCode"] == $roomCode){
             $roomExists = true;
@@ -23,7 +23,7 @@
         }
         $currentRoom = mysqli_fetch_assoc($roomRows); //Le prochain roomCode 
     }
-
+     //Actions e nfonction du résultat (Création de cookies)
     if($roomExists==false){
         setcookie(error, true , time() + (86400), "/"); // 86400 = 1 day
         header('Location: /projetWEB/Welcome.php');

@@ -28,7 +28,7 @@
 
     $query = "INSERT INTO `players`(`displayName`, `roomCode`) VALUES ('".$displayName."','".$roomCode."')";
     if(mysqli_query($bdd,$query)){
-        // echo("Bienvenu Nouveau Joueur");
+        // echo("Bienvenu Nouveau Joueur"); // Mis en commentaire car source d'erreur (logo qui s'affiche pas dans la barre de navigation)
     }
 
     //Si c'est un nouveau joueur pour cette salle

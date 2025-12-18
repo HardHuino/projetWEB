@@ -1,11 +1,9 @@
-// Example starter JavaScript for disabling form submissions if there are invalid fields CODE EBOOTSTRAP
+// CODE DE BOOTSTRAP pour verifier que les inputs des forms sont bien remplis
 (function () {
     'use strict'
     
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
     var forms = document.querySelectorAll('.needs-validation')
   
-    // Loop over them and prevent submission
     Array.prototype.slice.call(forms)
       .forEach(function (form) {
         form.addEventListener('submit', function (event) {
@@ -19,7 +17,7 @@
       })
   })();
 
-// Toggle between login and register forms
+// Fonction de switch d'element actif (entre connexion et inscription)
 
 function toggleForms() {
   var loginPane = document.getElementById('pills-login');

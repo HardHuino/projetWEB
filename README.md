@@ -1,4 +1,4 @@
-# PROJET WEB
+# PROJET WEB (OUTDATED)
 ## Contributeurs Corentin GIRARD, Olivier OLSON dans le cadre du module développement Web et Mobile de l'université Polytech Paris-Saclay
 ### On va créer 4 pages:
 -Acceuil
